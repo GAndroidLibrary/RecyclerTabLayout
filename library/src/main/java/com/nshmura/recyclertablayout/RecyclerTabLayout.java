@@ -41,6 +41,7 @@ public class RecyclerTabLayout extends RecyclerView {
     protected static final float DEFAULT_POSITION_THRESHOLD = 0.6f;
     protected static final float POSITION_THRESHOLD_ALLOWABLE = 0.001f;
 
+
     protected Paint mIndicatorPaint;
     protected int mTabBackgroundResId;
     protected int mTabOnScreenLimit;
@@ -98,6 +99,7 @@ public class RecyclerTabLayout extends RecyclerView {
     private void getAttributes(Context context, AttributeSet attrs, int defStyle) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.rtl_RecyclerTabLayout,
                 defStyle, R.style.rtl_RecyclerTabLayout);
+//        这种写法既可以 在xml中设置属性，又可以用java代码设置属性
         setIndicatorColor(a.getColor(R.styleable
                 .rtl_RecyclerTabLayout_rtl_tabIndicatorColor, 0));
         setIndicatorHeight(a.getDimensionPixelSize(R.styleable
@@ -202,7 +204,7 @@ public class RecyclerTabLayout extends RecyclerView {
         }
 
         if (smoothScroll && position != mIndicatorPosition) {
-            startAnimation(position);
+            //            startAnimation(position);
 
         } else {
             scrollToTab(position);
@@ -262,7 +264,7 @@ public class RecyclerTabLayout extends RecyclerView {
                 if (position == 0) {
                     float indicatorGap = (nextView.getMeasuredWidth() - selectedView.getMeasuredWidth()) / 2;
                     mIndicatorGap = (int) (indicatorGap * positionOffset);
-                    mIndicatorScroll = (int)((selectedView.getMeasuredWidth() + indicatorGap)  * positionOffset);
+                    mIndicatorScroll = (int) ((selectedView.getMeasuredWidth() + indicatorGap) * positionOffset);
 
                 } else {
                     float indicatorGap = (nextView.getMeasuredWidth() - selectedView.getMeasuredWidth()) / 2;
@@ -348,8 +350,8 @@ public class RecyclerTabLayout extends RecyclerView {
 
         int top = getHeight() - mIndicatorHeight;
         int bottom = getHeight();
-
-        canvas.drawRect(left, top, right, bottom, mIndicatorPaint);
+//      禁用 指示器
+//        canvas.drawRect(left, top, right, bottom, mIndicatorPaint);
     }
 
     protected boolean isLayoutRtl() {
@@ -451,6 +453,10 @@ public class RecyclerTabLayout extends RecyclerView {
 
         protected ViewPager mViewPager;
         protected int mIndicatorPosition;
+
+        public Adapter() {
+
+        }
 
         public Adapter(ViewPager viewPager) {
             mViewPager = viewPager;

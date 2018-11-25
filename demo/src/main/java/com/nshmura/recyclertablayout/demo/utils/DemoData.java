@@ -1,14 +1,14 @@
 package com.nshmura.recyclertablayout.demo.utils;
 
+import android.content.Context;
+import android.graphics.Color;
+
 import com.nshmura.recyclertablayout.demo.ColorItem;
 import com.nshmura.recyclertablayout.demo.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.content.Context;
-import android.graphics.Color;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +30,7 @@ public class DemoData {
         List<ColorItem> items = new ArrayList<>();
 
         try {
-            JSONObject obj = new JSONObject(loadJSONFromAsset(context, "colors.json"));
+            JSONObject obj = new JSONObject(loadJSONFromAsset(context, "colors1.json"));
             Iterator<String> keys = obj.keys();
             while (keys.hasNext()) {
                 String key = keys.next();
@@ -56,6 +56,16 @@ public class DemoData {
         is.close();
         return new String(buffer, "UTF-8");
     }
+
+
+    public static List<Integer> loadImageResourceList1() {
+        return new ArrayList<>(Arrays.asList(
+                R.drawable.ic_3d_rotation_white_36dp,
+                R.drawable.ic_accessibility_white_36dp,
+                R.drawable.ic_account_balance_wallet_white_36dp,
+                R.drawable.ic_account_balance_white_36dp));
+    }
+
 
     public static List<Integer> loadImageResourceList() {
         return new ArrayList<>(Arrays.asList(
