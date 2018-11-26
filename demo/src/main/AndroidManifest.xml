@@ -31,6 +31,10 @@
         <activity
                 android:name=".customview02.DemoCustomView02Activity"
                 android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".customview03.DemoCustomView03Activity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
+
         <activity
                 android:name=".years.DemoYearsActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>

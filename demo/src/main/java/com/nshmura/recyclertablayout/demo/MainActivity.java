@@ -1,15 +1,5 @@
 package com.nshmura.recyclertablayout.demo;
 
-import com.nshmura.recyclertablayout.demo.autoselect.DemoAutoSelectActivity;
-import com.nshmura.recyclertablayout.demo.basic.DemoBasicActivity;
-import com.nshmura.recyclertablayout.demo.customview01.DemoCustomView01Activity;
-import com.nshmura.recyclertablayout.demo.customview02.DemoCustomView02Activity;
-import com.nshmura.recyclertablayout.demo.imitationloop.DemoImitationLoopActivity;
-import com.nshmura.recyclertablayout.demo.rtl.DemoRtlActivity;
-import com.nshmura.recyclertablayout.demo.tabonscreenlimit.DemoTabOnScreenLimitActivity;
-import com.nshmura.recyclertablayout.demo.tabscrolldisabled.DemoTabScrollDisabledActivity;
-import com.nshmura.recyclertablayout.demo.years.DemoYearsActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +10,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.nshmura.recyclertablayout.demo.autoselect.DemoAutoSelectActivity;
+import com.nshmura.recyclertablayout.demo.basic.DemoBasicActivity;
+import com.nshmura.recyclertablayout.demo.customview01.DemoCustomView01Activity;
+import com.nshmura.recyclertablayout.demo.customview02.DemoCustomView02Activity;
+import com.nshmura.recyclertablayout.demo.customview03.DemoCustomView03Activity;
+import com.nshmura.recyclertablayout.demo.imitationloop.DemoImitationLoopActivity;
+import com.nshmura.recyclertablayout.demo.rtl.DemoRtlActivity;
+import com.nshmura.recyclertablayout.demo.tabonscreenlimit.DemoTabOnScreenLimitActivity;
+import com.nshmura.recyclertablayout.demo.tabscrolldisabled.DemoTabScrollDisabledActivity;
+import com.nshmura.recyclertablayout.demo.years.DemoYearsActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        枚举的values方法
         Demo demo = Demo.values()[position];
         switch (demo) {
             case BASIC:
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 DemoCustomView02Activity.startActivity(this, demo);
                 break;
 
+            case CUSTOM_VIEW03:
+                DemoCustomView03Activity.startActivity(this, demo);
+                break;
             case YEARS:
                 DemoYearsActivity.startActivity(this, demo);
                 break;

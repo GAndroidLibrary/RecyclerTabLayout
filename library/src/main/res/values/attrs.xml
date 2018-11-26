@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="rtl_RecyclerTabLayout">
+        <!--指示器 颜色-->
         <attr name="rtl_tabIndicatorColor" format="color"/>
+        <!--指示器高度-->
         <attr name="rtl_tabIndicatorHeight" format="dimension"/>
-
+        <!--每个标签的背景-->
         <attr name="rtl_tabBackground" format="reference"/>
-
+        <!-- -->
         <attr name="rtl_tabTextAppearance" format="reference"/>
+        <!--指定选项卡文本颜色-->
         <attr name="rtl_tabSelectedTextColor" format="color"/>
-
+        <!--OnScreen选项卡的数量。如果该值大于0，rtl_tabMinWidth与rtl_tabMaxWidth被忽略。
+        不滑动屏幕的情况下，一屏幕限制的tab的个数。
+        -->
         <attr name="rtl_tabOnScreenLimit" format="integer"/>
+        <!-- 每个标签的最小宽度-->
         <attr name="rtl_tabMinWidth" format="dimension"/>
+        <!-- 每个标签的最大宽度-->
         <attr name="rtl_tabMaxWidth" format="dimension"/>
-
+        <!--每个选项卡的起始边缘的填充-->
         <attr name="rtl_tabPaddingStart" format="dimension"/>
         <attr name="rtl_tabPaddingTop" format="dimension"/>
         <attr name="rtl_tabPaddingEnd" format="dimension"/>
         <attr name="rtl_tabPaddingBottom" format="dimension"/>
         <attr name="rtl_tabPadding" format="dimension"/>
-
+        <!-- 设置是否启用选项卡滚动 ，只能一个一个地选择，不能滑动选项卡跳过某些选项卡选择-->
         <attr name="rtl_scrollEnabled" format="boolean"/>
 
     </declare-styleable>

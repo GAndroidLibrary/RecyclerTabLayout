@@ -99,7 +99,7 @@ public class RecyclerTabLayout extends RecyclerView {
     private void getAttributes(Context context, AttributeSet attrs, int defStyle) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.rtl_RecyclerTabLayout,
                 defStyle, R.style.rtl_RecyclerTabLayout);
-//        这种写法既可以 在xml中设置属性，又可以用java代码设置属性
+        //        这种写法既可以 在xml中设置属性，又可以用java代码设置属性
         setIndicatorColor(a.getColor(R.styleable
                 .rtl_RecyclerTabLayout_rtl_tabIndicatorColor, 0));
         setIndicatorHeight(a.getDimensionPixelSize(R.styleable
@@ -177,6 +177,7 @@ public class RecyclerTabLayout extends RecyclerView {
         DefaultAdapter adapter = new DefaultAdapter(viewPager);
         adapter.setTabPadding(mTabPaddingStart, mTabPaddingTop, mTabPaddingEnd, mTabPaddingBottom);
         adapter.setTabTextAppearance(mTabTextAppearance);
+        //      参数从view传递给adapter
         adapter.setTabSelectedTextColor(mTabSelectedTextColorSet, mTabSelectedTextColor);
         adapter.setTabMaxWidth(mTabMaxWidth);
         adapter.setTabMinWidth(mTabMinWidth);
@@ -196,6 +197,12 @@ public class RecyclerTabLayout extends RecyclerView {
         scrollToTab(mViewPager.getCurrentItem());
     }
 
+    public void setOnlyMenuAdapter(RecyclerTabLayout.Adapter<?> adapter) {
+        mAdapter = adapter;
+        setAdapter(adapter);
+        scrollToTab(0);
+    }
+
     public void setCurrentItem(int position, boolean smoothScroll) {
         if (mViewPager != null) {
             mViewPager.setCurrentItem(position, smoothScroll);
@@ -204,7 +211,7 @@ public class RecyclerTabLayout extends RecyclerView {
         }
 
         if (smoothScroll && position != mIndicatorPosition) {
-            //            startAnimation(position);
+            startAnimation(position);
 
         } else {
             scrollToTab(position);
@@ -300,6 +307,8 @@ public class RecyclerTabLayout extends RecyclerView {
         if (position != mOldPosition || scrollOffset != mOldScrollOffset) {
             mLinearLayoutManager.scrollToPositionWithOffset(position, scrollOffset);
         }
+//      如果指示器的高度大于0 ，进行开始View树重绘流程(只绘制需要重绘的视图)。
+//        参考：https://blog.csdn.net/a553181867/article/details/51583060
         if (mIndicatorHeight > 0) {
             invalidate();
         }
@@ -309,6 +318,12 @@ public class RecyclerTabLayout extends RecyclerView {
         mOldPositionOffset = positionOffset;
     }
 
+    /**
+     * seachal annotation： 更新当前指示器的位置
+     * @param position
+     * @param dx
+     * @param positionOffset
+     */
     protected void updateCurrentIndicatorPosition(int position, float dx, float positionOffset) {
         if (mAdapter == null) {
             return;
@@ -350,14 +365,17 @@ public class RecyclerTabLayout extends RecyclerView {
 
         int top = getHeight() - mIndicatorHeight;
         int bottom = getHeight();
-//      禁用 指示器
-//        canvas.drawRect(left, top, right, bottom, mIndicatorPaint);
+        //      禁用 指示器
+           canvas.drawRect(left, top, right, bottom, mIndicatorPaint);
     }
 
     protected boolean isLayoutRtl() {
         return ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
     }
 
+    /**
+     * Recycler滚动监听
+     */
     protected static class RecyclerOnScrollListener extends OnScrollListener {
 
         protected RecyclerTabLayout mRecyclerTabLayout;
@@ -379,6 +397,7 @@ public class RecyclerTabLayout extends RecyclerView {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             switch (newState) {
+//                目前RecyclerView不是滚动，也就是静止
                 case SCROLL_STATE_IDLE:
                     if (mDx > 0) {
                         selectCenterTabForRightScroll();
@@ -419,6 +438,9 @@ public class RecyclerTabLayout extends RecyclerView {
         }
     }
 
+    /**
+     * ViewPager 页面变化监听
+     */
     protected static class ViewPagerOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         private final RecyclerTabLayout mRecyclerTabLayout;
@@ -447,6 +469,7 @@ public class RecyclerTabLayout extends RecyclerView {
             }
         }
     }
+
 
     public static abstract class Adapter<T extends RecyclerView.ViewHolder>
             extends RecyclerView.Adapter<T> {

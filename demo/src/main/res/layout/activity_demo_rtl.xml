@@ -4,6 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="rtl">
+    <!--重点在这里，layout 方向是 左右的-->
 
     <LinearLayout
             android:id="@+id/header"
